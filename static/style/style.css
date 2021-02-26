@@ -1,3 +1,7 @@
 body {
     background-image: url('https://background-tiles.com/overview/white/patterns/large/1020.png');
 }
+
+.container {
+    background: #e5e5e5;
+}

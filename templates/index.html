@@ -3,4 +3,38 @@
 {% block content %}
     <h1 class="text-center">Index page</h1>
     <p class="text-center">Welcome!</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Groceries</th>
+            <th>Price</th>
+            <th>Added</th>
+            <th>Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.created_at.date() }}</td>
+                <td><a href="" class="btn btn-warning">Edit</a>
+                    <a href="" class="btn btn-danger">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="/" method="POST">
+        <div class="mb-3">
+            <label for="item_name" class="form-label">New item:</label>
+            <input type="text" class="form-control" id="item_name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="item_price" class="form-label">Price</label>
+            <input type="text" class="form-control" id="item_price" name="price">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 {% endblock %}
