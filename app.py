@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -19,9 +19,22 @@ class Grocery(db.Model):
         return f'<Grocery {self.name}>'
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title='Main Page')
+    if request.method == 'POST':  # если я получаю данные из формы
+        name = request.form['name']
+        price = request.form['price']
+        new_stuff = Grocery(name=name, price=price)
+        try:  # попробовать сделать это:
+            db.session.add(new_stuff)  # добавляю в БД новый продукт
+            db.session.commit()  # сохраняю изменения
+            return redirect('/')  # перенаправляю пользователя на главную
+        except:
+            return 'There was a problem adding new item.'
+    else:
+        groceries = Grocery.query.order_by(Grocery.created_at).all()
+        # ^ генерирую все объекты из базы данных
+        return render_template('index.html', title='Main Page', items=groceries)
 
 
 if __name__ == '__main__':
