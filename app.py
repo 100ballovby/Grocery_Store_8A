@@ -37,7 +37,7 @@ def index():
         return render_template('index.html', title='Main Page', items=groceries)
 
 
-@app.route('/delete/<int:id>')
+@app.route('/delete/<id>')
 def delete(id):
     product = Grocery.query.get_or_404(id)
     # ^ сохраняю продукт в переменную
