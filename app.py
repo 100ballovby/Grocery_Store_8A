@@ -55,5 +55,21 @@ def not_found(error):
     return render_template('not_found.html'), 404
 
 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    product = Grocery.query.get_or_404(id)
+    if request.method == 'POST':  # если форма отправляется
+        product.name = request.form['name']  # взять название продукта из формы
+        product.price = request.form['price']  # взять стоимость из формы
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was a problem editing data'
+    else:
+        return render_template('update.html', title='Update data', items=product)
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=8910)
