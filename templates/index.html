@@ -6,25 +6,25 @@
 
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th>Groceries</th>
-            <th>Price</th>
-            <th>Added</th>
-            <th>Options</th>
-        </tr>
+            <tr>
+                <th>Groceries</th>
+                <th>Price</th>
+                <th>Added</th>
+                <th>Options</th>
+            </tr>
         </thead>
         <tbody>
-        {% for item in items %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.created_at.date() }}</td>
-                <td>
-                    <a href="" class="btn btn-warning">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-        {% endfor %}
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.created_at.date() }}</td>
+                    <td>
+                        <a href="" class="btn btn-warning">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
